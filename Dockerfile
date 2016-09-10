@@ -36,9 +36,11 @@ COPY startAll.sh /home/comses/deployr/$DEPLOYR_VERSION/
 COPY addUser.py /home/comses/
 
 USER root
-RUN chown comses: /home/comses/addUser.py && chmod a+x /home/comses/addUser.py && rm -rf /home/comses/download
+RUN chown -R comses: /home/comses/addUser.py /home/comses/deployr \
+    && chmod a+x /home/comses/addUser.py /home/comses/deployr/$DEPLOYR_VERSION/startAll.sh \
+    && rm -rf /home/comses/download
 
 EXPOSE 8000 8006
 
 USER comses
-CMD ["/home/comses/deployr/$DEPLOYR_VERSION/startAll.sh"]
+CMD ["/home/comses/deployr/8.0.0/startAll.sh"]

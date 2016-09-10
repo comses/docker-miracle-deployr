@@ -1,4 +1,6 @@
 '''
+FIXME: see if we can replace this script with a Django management command
+
 1. Find the database credentials
 2. Use pymongo to connect to database
 3. Create new users if not exist
@@ -15,6 +17,8 @@ import bcrypt
 USERNAME = 'comses'
 DEPLOYR_VERSION = '8.0.0'
 
+os.environ.setdefault('DEPLOYR_USER', 'miracle')
+
 # Open the configuration file
 file_name = '/home/{0}/deployr/{1}/deployr/deployr.groovy'.format(USERNAME, DEPLOYR_VERSION)
 info = {}
@@ -27,8 +31,8 @@ with open(file_name, 'r') as f:
 
 
 deployr_user = os.environ['DEPLOYR_USER']
-deployr_pass = 'changeme_deployr'
-deployr_pass_admin = 'changeme_deployr_admin'
+deployr_pass = 'SERIOUSLY_changeme_deployr'
+deployr_pass_admin = 'ADMIN_SERIOUSLY_changeme_deployr_admin'
 
 # Connect to mongoDB (at port 7403 of the deployr server by default)
 client = MongoClient('mongodb://%s:%s@%s:%s/' % (info['username'], info['password'], info['host'], info['port']))
