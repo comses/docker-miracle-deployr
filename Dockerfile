@@ -32,15 +32,14 @@ RUN cd /home/comses/download/installFiles && export JAVA_HOME=/usr/lib/jvm/java 
     && sh installDeployROpen.sh --no-ask --nolicense \
     && ln -s /miracle/projects /home/comses/deployr/$DEPLOYR_VERSION/deployr/external/data/public
 
-COPY startAll.sh /home/comses/deployr/$DEPLOYR_VERSION/
-COPY addUser.py /home/comses/
+COPY startAll.sh /home/comses/
 
 USER root
-RUN chown -R comses: /home/comses/addUser.py /home/comses/deployr \
-    && chmod a+x /home/comses/addUser.py /home/comses/deployr/$DEPLOYR_VERSION/startAll.sh \
+RUN chown -R comses: /home/comses/ \
+    && chmod a+rx /home/comses/startAll.sh \
     && rm -rf /home/comses/download
 
 EXPOSE 8000 8006
 
 USER comses
-CMD ["/home/comses/deployr/8.0.0/startAll.sh"]
+CMD ["/home/comses/startAll.sh"]
